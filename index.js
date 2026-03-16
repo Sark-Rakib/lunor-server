@@ -31,7 +31,15 @@ async function run() {
     const userColl = db.collection("users");
     const heroPhoto = db.collection("photo");
 
-    // GET all photos
+    // post all photos
+
+    app.post("/photos", async (req, res) => {
+      const photo = req.body;
+      const result = await heroPhoto.insertOne(photo);
+      res.send(result);
+    });
+    // get all photos
+
     app.get("/photos", async (req, res) => {
       const heroPhoto = db.collection("photo");
       const photos = await heroPhoto.find({}).toArray();
