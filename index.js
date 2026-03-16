@@ -29,6 +29,40 @@ async function run() {
     const ordersCollection = db.collection("orders");
     const contactCollection = db.collection("contact");
     const userColl = db.collection("users");
+    const heroPhoto = db.collection("photo");
+
+    // GET all photos
+    app.get("/photos", async (req, res) => {
+      const heroPhoto = db.collection("photo");
+      const photos = await heroPhoto.find({}).toArray();
+      res.send(photos);
+    });
+
+    // delete photo
+    app.delete("/photos/:id", async (req, res) => {
+      const { id } = req.params; // <-- change _id to id
+
+      if (!ObjectId.isValid(id)) {
+        return res.status(400).send({ success: false, message: "Invalid ID" });
+      }
+
+      try {
+        const result = await heroPhoto.deleteOne({
+          _id: new ObjectId(id),
+        });
+        if (result.deletedCount === 0) {
+          return res
+            .status(404)
+            .send({ success: false, message: "Photo not found" });
+        }
+        res.send({ success: true, message: "Photo deleted successfully" });
+      } catch (error) {
+        console.error(error);
+        res
+          .status(500)
+          .send({ success: false, message: "Failed to delete photo" });
+      }
+    });
 
     // user related api
 
