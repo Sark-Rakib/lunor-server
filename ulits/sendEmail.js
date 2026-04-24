@@ -34,7 +34,7 @@ const sendEmail = async (order) => {
         <p><b>District:</b> ${order.district}</p>
         <p><b>Street:</b> ${order.street}</p>
         <p><b>Description:</b> ${order.description}</p>
-        <p><b>Order Date:</b> ${order.createdAt}</p>
+        <p><b>Order:</b> ${order.createdAt}</p>
       `,
     };
 
