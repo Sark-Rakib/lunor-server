@@ -303,7 +303,7 @@ async function run() {
       res.send(result);
     });
 
-    // customer order get
+    // customer order gettting
     app.get("/orders-customer", async (req, res) => {
       const email = req.query.email;
       if (!email) {
