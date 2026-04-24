@@ -26,9 +26,15 @@ const sendEmail = async (order) => {
         <p><b>Size:</b> ${order.size}</p>
         <p><b>Total Price:</b> ৳${order.totalPrice}</p>
         <hr>
+        <p><b>Product Price:</b> ৳${order.totalPrice}</p>
+        <p><b>Delivary Charge:</b> ৳${order.deliveryCharge}</p>
+        <p><b>Total Price:</b> ৳${order.grandTotal}</p>
+        <p><b>payment Method:</b> ৳${order.paymentMethod}</p>
+        <hr>
         <p><b>District:</b> ${order.district}</p>
         <p><b>Street:</b> ${order.street}</p>
         <p><b>Description:</b> ${order.description}</p>
+        <p><b>Order Date:</b> ${order.createdAt}</p>
       `,
     };
 
