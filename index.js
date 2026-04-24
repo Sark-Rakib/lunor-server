@@ -272,44 +272,24 @@ async function run() {
 
     // backend/orders route in your main server file
 
-    // app.post("/orders", async (req, res) => {
-    //   const order = req.body;
-
-    //   try {
-    //     const result = await ordersCollection.insertOne({
-    //       ...order,
-    //       createdAt: new Date(),
-    //     });
-
-    //     // send email (try/catch inside sendEmail already)
-    //     await sendEmail(order);
-
-    //     res.send({ success: true, data: result });
-    //   } catch (err) {
-    //     console.error(err);
-    //     res
-    //       .status(500)
-    //       .send({ success: false, message: "Order creation failed" });
-    //   }
-    // });
-
     app.post("/orders", async (req, res) => {
       const order = req.body;
 
       try {
-        const newOrder = {
+        const result = await ordersCollection.insertOne({
           ...order,
           createdAt: new Date(),
-        };
+        });
 
-        const result = await ordersCollection.insertOne(newOrder);
-
-        await sendEmail(newOrder); // IMPORTANT
+        // send email (try/catch inside sendEmail already)
+        await sendEmail(order);
 
         res.send({ success: true, data: result });
       } catch (err) {
-        console.error("ORDER ERROR:", err);
-        res.status(500).send({ success: false });
+        console.error(err);
+        res
+          .status(500)
+          .send({ success: false, message: "Order creation failed" });
       }
     });
 
@@ -323,7 +303,7 @@ async function run() {
       res.send(result);
     });
 
-    // customer order gettting
+    // customer order get
     app.get("/orders-customer", async (req, res) => {
       const email = req.query.email;
       if (!email) {

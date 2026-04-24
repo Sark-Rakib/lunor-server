@@ -9,6 +9,8 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+console.log("🔥 sendEmail FILE LOADED");
+
 const sendEmail = async (order) => {
   try {
     const mailOptions = {
