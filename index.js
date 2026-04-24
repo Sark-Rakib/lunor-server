@@ -270,6 +270,29 @@ async function run() {
       res.send(reviews);
     });
 
+    // backend/orders route in your main server file
+
+    app.post("/orders", async (req, res) => {
+      const order = req.body;
+
+      try {
+        const result = await ordersCollection.insertOne({
+          ...order,
+          createdAt: new Date(),
+        });
+
+        // send email (try/catch inside sendEmail already)
+        await sendEmail(order);
+
+        res.send({ success: true, data: result });
+      } catch (err) {
+        console.error(err);
+        res
+          .status(500)
+          .send({ success: false, message: "Order creation failed" });
+      }
+    });
+
     // order post
     app.post("/orders", async (req, res) => {
       const order = req.body;
