@@ -294,15 +294,15 @@ async function run() {
     });
 
     // order post
-    app.post("/orders", async (req, res) => {
-      const order = req.body;
-      const newOrder = {
-        ...order,
-        createdAt: new Date(),
-      };
-      const result = await ordersCollection.insertOne(newOrder);
-      res.send(result);
-    });
+    // app.post("/orders", async (req, res) => {
+    //   const order = req.body;
+    //   const newOrder = {
+    //     ...order,
+    //     createdAt: new Date(),
+    //   };
+    //   const result = await ordersCollection.insertOne(newOrder);
+    //   res.send(result);
+    // });
 
     // order get
     app.get("/orders", async (req, res) => {
